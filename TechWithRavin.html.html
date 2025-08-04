@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWithRavin - Your Tech Problem Solver</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #2e59d9;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --success-color: #1cc88a;
+            --info-color: #36b9cc;
+            --warning-color: #f6c23e;
+            --danger-color: #e74a3b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f8f9fa;
+        }
+
+        .dark-mode .navbar,
+        .dark-mode .footer {
+            background-color: #121212 !important;
+        }
+
+        .dark-mode .card,
+        .dark-mode .list-group-item {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+
+        .dark-mode .form-control,
+        .dark-mode .form-select {
+            background-color: #333;
+            color: #fff;
+            border-color: #555;
+        }
+
+        .dark-mode .text-dark {
+            color: #f8f9fa !important;
+        }
+
+        .dark-mode .bg-light {
+            background-color: #2d2d2d !important;
+        }
+
+        .dark-mode .table {
+            color: #f8f9fa;
+        }
+
+        .dark-mode .table th,
+        .dark-mode .table td {
+            border-color: #444;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .category-badge {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .solution-card {
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            border-left-width: 8px;
+        }
+
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        .sticky-help-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 999;
+            background-color: var(--danger-color);
+            color: white;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .sticky-help-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .testimonial-card {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .rating-stars {
+            color: var(--warning-color);
+        }
+
+        .tech-problem-item {
+            padding: 0.75rem 1.25rem;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tech-problem-item:hover {
+            background-color: rgba(78, 115, 223, 0.1);
+            border-left-color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 4px solid white;
+        }
+
+        .dark-mode .timeline-item::before {
+            border-color: #2d2d2d;
+        }
+
+        .tab-content {
+            padding: 20px;
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .dark-mode .tab-content {
+            border-color: #444;
+            background-color: #2d2d2d;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .dark-mode .nav-tabs {
+            border-bottom-color: #444;
+        }
+
+        .dark-mode .nav-tabs .nav-link {
+            color: #f8f9fa;
+        }
+
+        .dark-mode .nav-tabs .nav-link.active {
+            background-color: #2d2d2d;
+            border-color: #444 #444 var(--primary-color);
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .page-section {
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .badge-primary {
+            background-color: var(--primary-color);
+        }
+
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color) !important;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark-mode ::-webkit-scrollbar-track {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .dark-mode ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .navbar, .footer, .sticky-help-btn, .back-to-top {
+                display: none !important;
+            }
+            
+            body {
+                padding: 0;
+                background: none;
+                color: #000;
+            }
+            
+            .page-section {
+                padding: 20px 0;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">TechWithRavin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solutions">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tutorials">Tutorials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#feedback">Feedback</a>
+                    </li>
+                </ul>
+                <div class="ms-3">
+                    <button id="darkModeToggle" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sticky Help Button -->
+    <a href="#contact" class="sticky-help-btn">
+        <i class="fas fa-question-circle me-2"></i>Need Help?
+    </a>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="page-section hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4 slide-up">Helping You Solve Your Tech Problems!</h1>
+            <p class="lead mb-5 slide-up">Easy, practical solutions for common technology issues - software, hardware, apps, internet, and devices.</p>
+            <div class="d-flex justify-content-center gap-3 slide-up">
+                <a href="#solutions" class="btn btn-light btn-lg px-4">Find Solutions</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg px-4">Get Help</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4 fade-in">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="h5">Computer Problems</h3>
+                            <p class="text-muted">Slow PC, Windows errors, hardware issues, and more. Step-by-step guides to fix them yourself.</p>
+                            <a href="#solutions" class="btn btn-sm btn-outline-primary">View Solutions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in" style="animation-delay: 0.2s;">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="h5">Mobile Issues</h3>
+                            <p class="text-muted">App crashes, storage problems, battery drain? We've got solutions for Android and iOS.</p>
+                            <a href="#solutions" class="btn btn-sm btn-outline-primary">View Solutions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in" style="animation-delay: 0.4s;">
+                    <div class="card feature-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h3 class="h5">Internet & Networking</h3>
+                            <p class="text-muted">Wi-Fi problems, router issues, browser errors? Learn how to fix them quickly.</p>
+                            <a href="#solutions" class="btn btn-sm btn-outline-primary">View Solutions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">What People Are Saying</h2>
+            <div class="row g-4">
+                <div class="col-md-4 fade-in">
+                    <div class="card h-100 testimonial-card">
+                        <div class="card-body">
+                            <div class="rating-stars mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Ravin helped me fix my laptop that wouldn't boot. His step-by-step guide was so easy to follow!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="rounded-circle me-3" width="50">
+                                <div>
+                                    <h6 class="mb-0">Sarah Lim</h6>
+                                    <small class="text-muted">Student</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in" style="animation-delay: 0.2s;">
+                    <div class="card h-100 testimonial-card">
+                        <div class="card-body">
+                            <div class="rating-stars mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"The tutorial on how to reset my router worked perfectly. Saved me from calling an expensive technician!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="rounded-circle me-3" width="50">
+                                <div>
+                                    <h6 class="mb-0">David Wong</h6>
+                                    <small class="text-muted">Small Business Owner</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in" style="animation-delay: 0.4s;">
+                    <div class="card h-100 testimonial-card">
+                        <div class="card-body">
+                            <div class="rating-stars mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">"As a senior, I find tech confusing, but Ravin's explanations are so clear. Fixed my phone storage issue easily."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="rounded-circle me-3" width="50">
+                                <div>
+                                    <h6 class="mb-0">Aisha Tan</h6>
+                                    <small class="text-muted">Retired Teacher</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page-section py-5">
+        <div class="container">
+            <h2 class="section-title">About TechWithRavin</h2>
+            <p class="lead mb-4">Empowering Everyone to Fix Their Own Tech Problems — One Guide at a Time.</p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-3">👋 Hey, I'm Ravin</h3>
+                            <p>Welcome to <strong>TechWithRavin</strong>, your trusted destination for easy, practical, and free tech help. I'm currently a <strong>Diploma in Information Technology</strong> student (Semester 4) with a strong passion for helping people solve their day-to-day technology issues — no complicated jargon, no confusing processes.</p>
+                            <p>What started as fixing a few laptops and phones for friends and family turned into a mission: <strong>making tech support easy, accessible, and understandable for everyone</strong> — students, working adults, seniors, even small business owners.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-3">🚀 What Is TechWithRavin?</h3>
+                            <p><strong>TechWithRavin</strong> is more than just a website — it's a growing knowledge base and support center for common (and uncommon) tech problems. From fixing slow laptops, formatting USBs, or resetting Wi-Fi routers, to understanding terms like SSD, DNS, or IP — I break things down into <strong>step-by-step guides</strong>, <strong>video tutorials</strong>, and <strong>troubleshooting tips</strong> that anyone can follow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">🎯 My Vision & Mission</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="h5 text-primary">My Vision:</h4>
+                                    <p>To become a go-to platform in Malaysia and beyond where anyone, regardless of tech experience, can find help, learn something new, and become more confident with technology.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h4 class="h5 text-primary">My Mission:</h4>
+                                    <ul>
+                                        <li>To help 10,000+ people solve tech problems using free online content</li>
+                                        <li>To promote digital literacy for all age groups</li>
+                                        <li>To make self-repair and digital confidence possible without needing paid IT support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">🧠 My Core Values</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-bolt text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Simplicity</h4>
+                                    <p class="mb-0">No confusing words, only clear, beginner-friendly guides</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-handshake text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Honesty</h4>
+                                    <p class="mb-0">I only share solutions that work and tools I personally test</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-graduation-cap text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Learning</h4>
+                                    <p class="mb-0">I grow as a student, and so does this platform</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-heart text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Support</h4>
+                                    <p class="mb-0">Everyone deserves help — whether it's fixing a glitch or learning how tech works</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">🛠️ What I Offer</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-book text-primary me-2"></i> Tutorials</h4>
+                                    <p class="mb-0">Fix common PC, phone, and internet problems with easy-to-follow guides.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-list-ol text-primary me-2"></i> Step-by-step Solutions</h4>
+                                    <p class="mb-0">Tested guides that actually work for real-world tech problems.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-comments text-primary me-2"></i> Ask Me</h4>
+                                    <p class="mb-0">Contact section where you can describe your problem and I'll help personally.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-lightbulb text-primary me-2"></i> Tech Explained</h4>
+                                    <p class="mb-0">Simple explanations of technical terms and concepts.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-tools text-primary me-2"></i> Free Tools & Resources</h4>
+                                    <p class="mb-0">Password generators, cleanup tools, security tips, and more.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card h-100 solution-card">
+                                <div class="card-body">
+                                    <h4 class="h5"><i class="fas fa-desktop text-primary me-2"></i> Remote Help</h4>
+                                    <p class="mb-0">On request via TeamViewer or Zoom for difficult problems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">👨‍💻 My Technical Skills</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Frontend Web Development</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Basic Networking</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Computer Hardware</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Software Troubleshooting</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Cybersecurity Basics</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name d-flex justify-content-between">
+                                    <span>Database Fundamentals</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">🗓️ My Tech Journey (Timeline)</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4 class="h5">2015–2021</h4>
+                            <p>Started helping friends fix phones, PCs, and Wi-Fi problems</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="h5">2024</h4>
+                            <p>Built my first custom desktop — sparked my passion for tech</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="h5">2024–2025</h4>
+                            <p>Enrolled in Diploma in IT — learned coding, networking, system design</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="h5">2024 (Now)</h4>
+                            <p>Created TechWithRavin to help people beyond my circle</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">📈 What's Coming Next?</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-mobile-alt text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Mobile Version</h4>
+                                    <p class="mb-0">Mobile-optimized version of the website</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-video text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">YouTube Tutorials</h4>
+                                    <p class="mb-0">Video tutorials in Bahasa & English</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-tools text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">Tech Tools</h4>
+                                    <p class="mb-0">Download center for useful tools</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-book text-primary mb-3" style="font-size: 2rem;"></i>
+                                    <h4 class="h5">eBook</h4>
+                                    <p class="mb-0">Tech Survival Guide for Non-Techies (Coming Soon)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="page-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Tech Problems & Solutions</h2>
+            <p class="lead mb-5">Find solutions to common tech problems categorized below.</p>
+            
+            <ul class="nav nav-tabs" id="solutionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="computer-tab" data-bs-toggle="tab" data-bs-target="#computer" type="button" role="tab">Computer</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mobile-tab" data-bs-toggle="tab" data-bs-target="#mobile" type="button" role="tab">Mobile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="internet-tab" data-bs-toggle="tab" data-bs-target="#internet" type="button" role="tab">Internet</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="software-tab" data-bs-toggle="tab" data-bs-target="#software" type="button" role="tab">Software</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">Security</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="solutionTabsContent">
+                <div class="tab-pane fade show active" id="computer" role="tabpanel">
+                    <h3 class="mb-4">💻 Computer & Laptop Problems</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Slow PC Fix</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Step-by-step guide to speed up your slow computer</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Windows Not Booting</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Troubleshoot and fix Windows startup issues</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Overheating Laptop</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Solutions for laptops that get too hot</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Disk Full Issue</h5>
+                                        <small class="text-muted">Updated: 5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">How to free up space on your hard drive</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Install Windows (USB Method)</h5>
+                                        <small class="text-muted">Updated: 2 weeks ago</small>
+                                    </div>
+                                    <p class="mb-1">Complete guide to installing Windows from a USB drive</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Check System Specs</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Find out your computer's hardware specifications</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Upgrade RAM or SSD</h5>
+                                        <small class="text-muted">Updated: 4 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Step-by-step guide to upgrading your computer</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Use Windows Safe Mode</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Troubleshoot problems using Safe Mode</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Check Disk Health</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Using CHKDSK to check for disk errors</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Difference Between HDD, SSD, NVMe</h5>
+                                        <small class="text-muted">Updated: 2 weeks ago</small>
+                                    </div>
+                                    <p class="mb-1">Understanding different storage types</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="mobile" role="tabpanel">
+                    <h3 class="mb-4">📱 Mobile & Tablet Problems</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Phone Hanging</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Fix your phone when it freezes or becomes unresponsive</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Battery Draining Fast</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Extend your phone's battery life</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Update Android or iOS</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Step-by-step guide to updating your phone</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Back Up Your Phone</h5>
+                                        <small class="text-muted">Updated: 5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Backup your data to cloud services</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Find Your Lost Phone</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Track your lost Android or iPhone</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Free Up Storage</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Clear space on your Android or iPhone</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Record Screen on Android</h5>
+                                        <small class="text-muted">Updated: 4 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Record your phone screen without apps</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Connect Phone to TV</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Mirror your phone screen to your television</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Share Internet via Hotspot</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Turn your phone into a Wi-Fi hotspot</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Reset Android Without Losing Data</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Factory reset while keeping your files</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="internet" role="tabpanel">
+                    <h3 class="mb-4">🌐 Internet & Networking Problems</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">No Wi-Fi Connection</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Troubleshoot Wi-Fi connection issues</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Router Reset Guide</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">How to properly reset your router</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Fix "No Internet Access"</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Solve "connected but no internet" issues</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">What is DNS and How to Change It</h5>
+                                        <small class="text-muted">Updated: 5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Understanding and changing DNS settings</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Setup a New Wi-Fi Router</h5>
+                                        <small class="text-muted">Updated: 2 weeks ago</small>
+                                    </div>
+                                    <p class="mb-1">Step-by-step router installation guide</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Find Your IP Address</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Find your public and private IP addresses</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Check Internet Speed</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Accurately test your internet connection speed</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Best Browsers for Privacy</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Most secure browsers for private browsing</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Stop Wi-Fi Theft</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Prevent neighbors from using your Wi-Fi</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Fix DNS_PROBE_FINISHED Errors</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Solve common DNS errors in browsers</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="software" role="tabpanel">
+                    <h3 class="mb-4">🔧 Software Help</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">MS Word Crashed</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Fix Microsoft Word when it crashes or freezes</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">PDF Not Opening</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Troubleshoot PDF file opening issues</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Update Drivers</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Keep your device drivers up to date</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Uninstall Programs Completely</h5>
+                                        <small class="text-muted">Updated: 5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Remove software without leftover files</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Best Free PDF Editors</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Top free tools for editing PDF files</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Free Video Editors for Beginners</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Easy-to-use video editing software</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Use Device Manager</h5>
+                                        <small class="text-muted">Updated: 4 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Manage hardware devices in Windows</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Fix "No Sound" in Windows</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Troubleshoot audio problems</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Best Code Editors for Students</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Top free coding tools for beginners</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Install a Printer Without CD</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Install printer drivers without installation disc</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="security" role="tabpanel">
+                    <h3 class="mb-4">🔐 Security & Privacy Guides</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Create Strong Passwords</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Tips for creating and remembering secure passwords</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Enable 2FA on Gmail, Facebook</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Add extra security to your accounts</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Remove Malware Manually</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Step-by-step malware removal guide</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">What is Ransomware and How to Prevent It</h5>
+                                        <small class="text-muted">Updated: 5 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Protect yourself from ransomware attacks</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Browse Safely on Public Wi-Fi</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Stay secure when using public networks</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Best Free VPNs (With Limitations)</h5>
+                                        <small class="text-muted">Updated: 3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Top free VPN services and their limitations</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Encrypt Your Files</h5>
+                                        <small class="text-muted">Updated: 4 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Protect sensitive files with encryption</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Check If Your Data Was Leaked</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Check if your email or password was compromised</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">Best Free Firewalls for Windows</h5>
+                                        <small class="text-muted">Updated: 2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Top firewall software to protect your PC</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action tech-problem-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-1">How to Block Websites Using Hosts File</h5>
+                                        <small class="text-muted">Updated: 1 week ago</small>
+                                    </div>
+                                    <p class="mb-1">Block distracting or harmful websites</p>
+                                    <small>Click to view solution</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutorials" class="page-section py-5">
+        <div class="container">
+            <h2 class="section-title">Tutorials & How-to Guides</h2>
+            <p class="lead mb-5">Step-by-step tutorials for common tech tasks.</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 fade-in">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Speed up your PC">
+                        <div class="card-body">
+                            <h3 class="h5">How to Speed Up Your PC</h3>
+                            <p class="card-text">Comprehensive guide to optimizing your Windows computer for better performance.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">15 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 fade-in" style="animation-delay: 0.2s;">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Reset router">
+                        <div class="card-body">
+                            <h3 class="h5">How to Reset a Router</h3>
+                            <p class="card-text">Step-by-step instructions for resetting your Wi-Fi router to factory settings.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">8 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 fade-in" style="animation-delay: 0.4s;">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Clear cache">
+                        <div class="card-body">
+                            <h3 class="h5">How to Clear Browser Cache</h3>
+                            <p class="card-text">Learn how to clear cache in Chrome, Firefox, Edge, and Safari to fix loading issues.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">5 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 fade-in">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Antivirus software">
+                        <div class="card-body">
+                            <h3 class="h5">Top 5 Antivirus Software</h3>
+                            <p class="card-text">Comparison of the best antivirus programs for Windows, Mac, and Android.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">12 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 fade-in" style="animation-delay: 0.2s;">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Install Windows">
+                        <div class="card-body">
+                            <h3 class="h5">Install Windows from USB</h3>
+                            <p class="card-text">Complete guide to creating a bootable USB and installing Windows from scratch.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">20 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 fade-in" style="animation-delay: 0.4s;">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="RAM vs ROM">
+                        <div class="card-body">
+                            <h3 class="h5">Difference Between RAM & ROM</h3>
+                            <p class="card-text">Understand the difference between these two types of computer memory.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">6 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Read Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary px-4">View All Tutorials</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="page-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Ask for Help</h2>
+            <p class="lead mb-5">Can't find a solution? Contact me directly and I'll help you with your tech problem.</p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-4">Contact Form</h3>
+                            <form id="contactForm" action="https://formspree.io/f/helptechravin2004@gmail.com" method="POST">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="problemType" class="form-label">Problem Type</label>
+                                    <select class="form-select" id="problemType" name="problemType">
+                                        <option value="computer">Computer/Laptop</option>
+                                        <option value="mobile">Mobile/Tablet</option>
+                                        <option value="internet">Internet/Networking</option>
+                                        <option value="software">Software</option>
+                                        <option value="security">Security/Privacy</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Describe Your Problem</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                            <div id="formSuccess" class="alert alert-success mt-3 d-none">
+                                Your message has been sent successfully! I'll get back to you soon.
+                            </div>
+                            <div id="formError" class="alert alert-danger mt-3 d-none">
+                                There was an error sending your message. Please try again later.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-4">Other Ways to Contact</h3>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">Email</h5>
+                                    <p class="mb-0"><a href="mailto:helptechravin2004@gmail.com">helptechravin2004@gmail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">Phone/WhatsApp</h5>
+                                    <p class="mb-0"><a href="tel:+601136682561">+60 11-3668-2561</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fab fa-telegram"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">Telegram</h5>
+                                    <p class="mb-0"><a href="http://t.me/itsravin6" target="_blank">@itsravin6</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fab fa-instagram"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">Instagram</h5>
+                                    <p class="mb-0"><a href="https://www.instagram.com/itsravin6/profilecard/?igsh=MXY5dXRvMTZ0ZTAyag==" target="_blank">@itsravin6</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">Facebook</h5>
+                                    <p class="mb-0"><a href="https://www.facebook.com/share/19W43J2SkR/" target="_blank">TechWithRavin</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">LinkedIn</h5>
+                                    <p class="mb-0"><a href="http://www.linkedin.com/in/ravin-nash-90238234a" target="_blank">Ravin Nash</a></p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fab fa-tiktok"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-0">TikTok</h5>
+                                    <p class="mb-0"><a href="https://www.tiktok.com/@itsravin6?_t=ZS-8yXC2NZAuBB&_r=1" target="_blank">@itsravin6</a></p>
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h4 class="h5 mb-3">Remote Support</h4>
+                            <p>For complex issues, I can provide remote assistance using:</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">TeamViewer</span>
+                                <span class="badge bg-primary">AnyDesk</span>
+                                <span class="badge bg-primary">Zoom</span>
+                                <span class="badge bg-primary">Google Meet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="page-section py-5">
+        <div class="container">
+            <h2 class="section-title">Feedback & Testimonials</h2>
+            <p class="lead mb-5">Let me know if my solutions helped you or how I can improve.</p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-4">Share Your Feedback</h3>
+                            <form id="feedbackForm">
+                                <div class="mb-3">
+                                    <label for="feedbackName" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="feedbackName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="feedbackEmail" class="form-label">Email Address (optional)</label>
+                                    <input type="email" class="form-control" id="feedbackEmail">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="feedbackRating" class="form-label">Rating</label>
+                                    <select class="form-select" id="feedbackRating" required>
+                                        <option value="">Select rating</option>
+                                        <option value="5">★★★★★ - Excellent</option>
+                                        <option value="4">★★★★☆ - Very Good</option>
+                                        <option value="3">★★★☆☆ - Good</option>
+                                        <option value="2">★★☆☆☆ - Fair</option>
+                                        <option value="1">★☆☆☆☆ - Poor</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="feedbackMessage" class="form-label">Your Feedback</label>
+                                    <textarea class="form-control" id="feedbackMessage" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                            </form>
+                            <div id="feedbackSuccess" class="alert alert-success mt-3 d-none">
+                                Thank you for your feedback! It helps me improve my content.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="h4 mb-4">What People Are Saying</h3>
+                            <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-item text-center">
+                                            <div class="rating-stars mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-4">"The guide on how to speed up my laptop worked perfectly! My 5-year-old PC now runs like new. Thank you, Ravin!"</p>
+                                            <div class="d-flex justify-content-center">
+                                                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="rounded-circle me-3" width="60">
+                                                <div class="text-start">
+                                                    <h6 class="mb-0">Lisa Tan</h6>
+                                                    <small class="text-muted">College Student</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="testimonial-item text-center">
+                                            <div class="rating-stars mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-4">"I was about to buy a new phone because of battery issues, but Ravin's tutorial helped me fix it in minutes. Saved me RM2000!"</p>
+                                            <div class="d-flex justify-content-center">
+                                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="rounded-circle me-3" width="60">
+                                                <div class="text-start">
+                                                    <h6 class="mb-0">Ahmad bin Ismail</h6>
+                                                    <small class="text-muted">Small Business Owner</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="testimonial-item text-center">
+                                            <div class="rating-stars mb-3">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <p class="mb-4">"The Wi-Fi troubleshooting guide helped me fix my internet connection. Now my kids can attend online classes without interruption."</p>
+                                            <div class="d-flex justify-content-center">
+                                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="rounded-circle me-3" width="60">
+                                                <div class="text-start">
+                                                    <h6 class="mb-0">Priya Devi</h6>
+                                                    <small class="text-muted">Homemaker</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h4 class="h5 mb-3">Success Stories</h4>
+                            <div class="accordion" id="successStoriesAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                            Recovered Important Documents
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#successStoriesAccordion">
+                                        <div class="accordion-body">
+                                            <p>"My thesis file got corrupted and I almost had a heart attack. Ravin's guide on file recovery saved my 6 months of work! I was able to recover the file and submit it on time."</p>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="User" class="rounded-circle me-3" width="40">
+                                                <div>
+                                                    <h6 class="mb-0">Nurul Huda</h6>
+                                                    <small class="text-muted">University Student</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                            Fixed Grandma's Tablet
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#successStoriesAccordion">
+                                        <div class="accordion-body">
+                                            <p>"My grandma's tablet wouldn't turn on and she was devastated because it had all her photos. Following Ravin's step-by-step video, I was able to fix it myself. Grandma is happy again!"</p>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="rounded-circle me-3" width="40">
+                                                <div>
+                                                    <h6 class="mb-0">Jason Lim</h6>
+                                                    <small class="text-muted">Graphic Designer</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                            Saved From Scammers
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#successStoriesAccordion">
+                                        <div class="accordion-body">
+                                            <p>"I almost fell for a tech support scam when my PC showed a fake virus warning. Thanks to Ravin's article on identifying scams, I recognized it was fake and avoided losing money."</p>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="User" class="rounded-circle me-3" width="40">
+                                                <div>
+                                                    <h6 class="mb-0">Robert Chan</h6>
+                                                    <small class="text-muted">Retired Banker</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="page-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="lead mb-5">Common questions about TechWithRavin and tech support.</p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="accordion" id="faqAccordion1">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading1">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
+                                            What kind of problems do you solve?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            <p>I help with a wide range of tech problems including:</p>
+                                            <ul>
+                                                <li>Computer/laptop issues (slow performance, not turning on, hardware problems)</li>
+                                                <li>Mobile/tablet problems (battery drain, app crashes, storage issues)</li>
+                                                <li>Internet and networking (Wi-Fi problems, router setup, connection issues)</li>
+                                                <li>Software help (Microsoft Office, PDF, browser problems)</li>
+                                                <li>Security and privacy (passwords, malware removal, scam prevention)</li>
+                                            </ul>
+                                            <p>If you're not sure if I can help with your specific problem, just ask!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading2">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
+                                            Can I contact you anytime?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            <p>You can send me a message anytime through the contact form, email, or social media. I typically respond within 24 hours, often much sooner. My usual availability is:</p>
+                                            <ul>
+                                                <li><strong>Weekdays:</strong> 9:00 AM - 10:00 PM (GMT+8)</li>
+                                                <li><strong>Weekends:</strong> 10:00 AM - 8:00 PM (GMT+8)</li>
+                                            </ul>
+                                            <p>For urgent issues outside these hours, you can try WhatsApp or Telegram, but response time may vary.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading3">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
+                                            Is this service free?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion1">
+                                        <div class="accordion-body">
+                                            <p><strong>Yes!</strong> All the content on TechWithRavin is completely free to access. My mission is to make tech help accessible to everyone regardless of their budget.</p>
+                                            <p>If you find my help valuable and want to support this project, you can:</p>
+                                            <ul>
+                                                <li>Share my website with others who might need help</li>
+                                                <li>Leave positive feedback or testimonials</li>
+                                                <li>Follow me on social media and engage with my content</li>
+                                            </ul>
+                                            <p>For complex issues that require significant time investment (like remote troubleshooting sessions), donations are appreciated but never required.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="accordion" id="faqAccordion2">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading4">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">
+                                            Do you offer online support?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse4" class="accordion-collapse collapse show" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            <p>Yes! For problems that can't be solved through guides alone, I offer remote support using:</p>
+                                            <ul>
+                                                <li><strong>TeamViewer</strong> - For full remote control of your computer</li>
+                                                <li><strong>AnyDesk</strong> - Alternative remote desktop software</li>
+                                                <li><strong>Zoom/Google Meet</strong> - For video calls and screen sharing</li>
+                                            </ul>
+                                            <p>Remote sessions are typically limited to 30-60 minutes for free support. For longer or more complex issues, we can discuss options based on your situation.</p>
+                                            <div class="alert alert-warning mt-3">
+                                                <strong>Important:</strong> I will never ask for payment upfront or request remote access without your explicit permission. Beware of scammers pretending to be tech support.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading5">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5">
+                                            How can I learn more about tech?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            <p>I'm glad you're interested in learning more! Here are some ways to build your tech skills:</p>
+                                            <ol>
+                                                <li><strong>Start with my tutorials</strong> - I explain concepts in simple terms</li>
+                                                <li><strong>Practice on old devices</strong> - Try fixing or upgrading an old phone/computer</li>
+                                                <li><strong>Free online courses</strong> - Check out platforms like:
+                                                    <ul>
+                                                        <li>Codecademy (for coding)</li>
+                                                        <li>Google Digital Garage (for basics)</li>
+                                                        <li>Microsoft Learn (for Windows/Office)</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>YouTube channels</strong> - Many great tech educators like:
+                                                    <ul>
+                                                        <li>Linus Tech Tips (for hardware)</li>
+                                                        <li>Techquickie (for explanations)</li>
+                                                        <li>ThioJoe (for tutorials)</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                            <p>Remember, everyone starts as a beginner. Don't be afraid to ask questions!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="faqHeading6">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6">
+                                            Can you help with hardware repairs?
+                                        </button>
+                                    </h2>
+                                    <div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion2">
+                                        <div class="accordion-body">
+                                            <p>I can guide you through many common hardware issues like:</p>
+                                            <ul>
+                                                <li>Cleaning dust from laptops/computers</li>
+                                                <li>Replacing RAM or storage drives</li>
+                                                <li>Troubleshooting display or keyboard issues</li>
+                                                <li>Basic phone repairs (battery replacement, screen issues)</li>
+                                            </ul>
+                                            <p>However, for complex hardware problems or if you're not comfortable opening devices, I recommend:</p>
+                                            <ol>
+                                                <li>Checking if the device is under warranty first</li>
+                                                <li>Consulting a professional repair service for:
+                                                    <ul>
+                                                        <li>Liquid damage repairs</li>
+                                                        <li>Motherboard-level issues</li>
+                                                        <li>Data recovery from damaged drives</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                            <p>I can help you understand what might be wrong and whether it's something you can fix yourself or need professional help with.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="h4 text-white mb-4">TechWithRavin</h3>
+                    <p>Helping you solve tech problems with easy-to-follow guides and personal support.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="h5 text-white mb-4">Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white">About</a></li>
+                        <li class="mb-2"><a href="#solutions" class="text-white">Solutions</a></li>
+                        <li class="mb-2"><a href="#tutorials" class="text-white">Tutorials</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="h5 text-white mb-4">Resources</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white">Tech Glossary</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Free Tools</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Recommended Software</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Learning Resources</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h4 class="h5 text-white mb-4">Newsletter</h4>
+                    <p>Subscribe to get tech tips and new tutorials directly to your inbox.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 TechWithRavin. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> by Ravin</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved user preference or use system preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                }
+            });
+        });
+        
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission (in a real implementation, this would be an actual form submission)
+                setTimeout(() => {
+                    contactForm.reset();
+                    formSuccess.classList.remove('d-none');
+                    formError.classList.add('d-none');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        formSuccess.classList.add('d-none');
+                    }, 5000);
+                }, 1000);
+            });
+        }
+        
+        // Feedback form handling
+        const feedbackForm = document.getElementById('feedbackForm');
+        const feedbackSuccess = document.getElementById('feedbackSuccess');
+        
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    feedbackForm.reset();
+                    feedbackSuccess.classList.remove('d-none');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        feedbackSuccess.classList.add('d-none');
+                    }, 5000);
+                }, 1000);
+            });
+        }
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in, .slide-up');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Initialize animations
+        animateOnScroll();
+        
+        // Database simulation (in a real implementation, this would connect to an actual database)
+        const database = {
+            contactSubmissions: [],
+            feedbackSubmissions: [],
+            
+            addContactSubmission: function(submission) {
+                this.contactSubmissions.push(submission);
+                console.log('New contact submission:', submission);
+            },
+            
+            addFeedbackSubmission: function(submission) {
+                this.feedbackSubmissions.push(submission);
+                console.log('New feedback submission:', submission);
+            }
+        };
+    </script>
+</body>
+</html>
